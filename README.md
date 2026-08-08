@@ -287,7 +287,7 @@ All generated files successfully pass the provided validation script.
 Clone the repository.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Moulya-Reddy/Freight_Rate_Prediction_using_Machine_Learning.git
 
 cd freight-rate-solution
 ```
