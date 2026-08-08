@@ -88,6 +88,7 @@ freight-rate-solution/
 ├── validation_predictions.csv
 ├── training_report.json
 ├── README.md
+├── score.py
 ├── requirements.txt
 └── requirements-dev.txt
 ```
