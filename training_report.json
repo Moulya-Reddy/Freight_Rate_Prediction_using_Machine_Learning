@@ -1,0 +1,99 @@
+{
+  "train_window": {
+    "start": "2025-01-01",
+    "end": "2025-10-31",
+    "n_rows": 48000
+  },
+  "headline_holdout_window": {
+    "start": "2025-09-06",
+    "end": "2025-10-31",
+    "n_rows": 8759
+  },
+  "headline_comparison_untuned": [
+    {
+      "mae": 110.30229202060782,
+      "rmse": 653.721209160267,
+      "mape_pct": 4.861640159865937,
+      "model": "catboost",
+      "seconds": 14.4
+    },
+    {
+      "mae": 122.66323786750368,
+      "rmse": 657.1972436376262,
+      "mape_pct": 5.320677606861881,
+      "model": "hgb",
+      "seconds": 5.7
+    },
+    {
+      "mae": 154.2240043653032,
+      "rmse": 664.6858505722167,
+      "mape_pct": 6.84822054835019,
+      "model": "lightgbm",
+      "seconds": 7.1
+    },
+    {
+      "mae": 159.3942633189038,
+      "rmse": 669.5969745343784,
+      "mape_pct": 7.031105815397061,
+      "model": "xgboost",
+      "seconds": 4.4
+    },
+    {
+      "mae": 401.9277038964963,
+      "rmse": 894.5992860116344,
+      "mape_pct": 17.97880325699254,
+      "model": "linear",
+      "seconds": 0.1
+    }
+  ],
+  "optuna_tuning": {
+    "catboost": {
+      "cv_mae": 109.56892370998595,
+      "params": {
+        "iterations": 445,
+        "learning_rate": 0.03755115322842063,
+        "depth": 5,
+        "l2_leaf_reg": 2.324672848950434
+      },
+      "headline_holdout": {
+        "mae": 114.81688773003104,
+        "rmse": 655.3836873007706,
+        "mape_pct": 4.984501596148283
+      }
+    },
+    "lightgbm": {
+      "cv_mae": 116.48653037455404,
+      "params": {
+        "n_estimators": 244,
+        "learning_rate": 0.04112514071112866,
+        "max_depth": 4,
+        "num_leaves": 42,
+        "min_child_samples": 18,
+        "subsample": 0.7085396127095583,
+        "colsample_bytree": 0.9314950036607718,
+        "reg_lambda": 0.5170191786366992
+      },
+      "headline_holdout": {
+        "mae": 125.33169810240612,
+        "rmse": 657.6893589997907,
+        "mape_pct": 5.449635753840199
+      }
+    }
+  },
+  "winner": {
+    "name": "catboost",
+    "kind": "catboost",
+    "is_tuned": false,
+    "params": {},
+    "headline_mae": 110.30229202060782
+  },
+  "final_model_trained_on_all_rows": 48000,
+  "data_quality_fixes": [
+    "weight: took abs() of negative values (~0.6% of rows)",
+    "weight: missing values (~0.6% of rows) filled with the training-set median for that equipment type",
+    "market_index: missing values (~0.8% of rows) filled with the training-set median"
+  ],
+  "feature_additions": [
+    "lane_hist_rate_per_mile / lane_hist_count / equip_hist_rate_per_mile: leakage-safe expanding-window (causal) history features -- see src/features.py docstring"
+  ]
+}
