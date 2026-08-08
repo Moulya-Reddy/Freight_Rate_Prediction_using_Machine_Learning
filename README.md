@@ -289,7 +289,7 @@ Clone the repository.
 ```bash
 git clone https://github.com/Moulya-Reddy/Freight_Rate_Prediction_using_Machine_Learning.git
 
-cd freight-rate-solution
+cd Freight_Rate_Prediction_using_Machine_Learning
 ```
 
 Install development dependencies.
